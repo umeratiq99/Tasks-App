@@ -4,7 +4,7 @@ const { create, retrieve, update, deletes } = require("../services/taskServices"
 //create a task for specific user
 const createTask = async (req, res) => {
   try {
-    const data = { ...req.body, userid: req.userId };
+    const data = { ...req.body, userid: req.query.user };
 
     const newtask = await create(data);
     if (newtask.success) {
@@ -19,10 +19,12 @@ const createTask = async (req, res) => {
 
 // // getting all tasks for certain user
 const findTasks = async (req, res) => {
+
+  console.log(req);
   try {
     let options = {};
     let where = {};
-    where.userid = req.userId;
+    where.userid = req.query.user;
     if (req.query.status) {
       where.status = req.query.status;
     }
@@ -43,10 +45,11 @@ const findTasks = async (req, res) => {
 
 // //updating values in existent task
 const updateTasks = async (req, res) => {
+
   try {
     let where = {};
-    where.userid = req.userId;
-    const { id } = req.params;
+    where.userid = req.query.user;
+    const id = req.query.id;
     where.id = id;
     const obj = req.body;
     const utask = await update(obj,where);
@@ -63,10 +66,11 @@ const updateTasks = async (req, res) => {
 const deleteTasks = async (req, res) => {
   try {
     const where={}
-    const { id } = req.params;
+    const { id, user } = req.query;
     where.id=id;
-    where.userid = req.userId;
-    const dtask = await deletes( where);
+    where.userid = user;
+    console.log(where);
+    const dtask = await deletes( {where});
     if (dtask.success) {
       res.status(200).json(dtask.response);
     } else {

@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,12 +17,17 @@ const Login = () => {
       console.log(isValid)
       return;
     }
+    const body = {
+      "email": email,
+      "password" : password
+    }
+    axios.post("http://localhost:5000/user/login", body).then(res => {
+      localStorage.setItem('token', res.data.token);
+      navigate('/tasks')
+    }).catch(e => {
+      console.log(e)
+    })
 
-    // Email is valid, proceed with form submission or any other action
-    // ...
-
-    // Reset form
-    setEmail('');
     setIsValid(true);
   };
 
@@ -28,17 +37,16 @@ const Login = () => {
     return emailRegex.test(email);
   };
   return (
-    <form action="/action_page.php" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <h1>Login</h1>
       <div className="form-group">
         <label htmlFor="email">Email address:</label>
         <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required/>
       </div>
-      {/* TODO: add red color */}
       {!isValid && <p className="error">Please enter a valid email address.</p>}
       <div className="form-group">
         <label htmlFor="pwd">Password:</label>
-        <input type="password" className="form-control" id="pwd" required/>
+        <input type="password" className="form-control" id="pwd" onChange={e => setPassword(e.target.value)} required/>
       </div>
       <button type="submit" className="btn btn-default">
         Login

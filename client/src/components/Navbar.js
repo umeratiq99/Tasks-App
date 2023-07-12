@@ -12,7 +12,10 @@ const Navbar = () => {
       {/* <li><Link to='/'>Add</Link></li> */}
       {/* <li><Link to="/">Link</Link></li> */}
     </ul>
-    <button className="btn btn-danger navbar-btn">Button</button>
+    <button className="btn btn-danger navbar-btn"onClick={()=>{
+      localStorage.removeItem('token');
+      window.location.reload();
+    }}>Logout</button>
   </div>
 </nav>
 

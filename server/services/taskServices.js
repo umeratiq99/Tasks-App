@@ -27,8 +27,10 @@ const retrieve=async(options)=>{
 }
 
 const update=async(obj,where)=>{
-    try{
-        const utasks=await Tasks.update(obj, { where });
+    try{        
+        console.log(obj, where)
+        const utasks= await Tasks.update(obj,{where});
+        console.log(utasks);
         if(utasks){
             return({message: "Updated", success: true, response:utasks});
         }else{
@@ -41,7 +43,7 @@ const update=async(obj,where)=>{
 
 const deletes= async(where)=>{
     try{
-        const dtasks=await Tasks.destroy({ where});
+        const dtasks=await Tasks.destroy(where);
         if(dtasks){
             return({message: "Updated", success: true, response:dtasks});
         }else{

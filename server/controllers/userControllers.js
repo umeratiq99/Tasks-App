@@ -23,6 +23,7 @@ const login = async (req, res) => {
         const log= await Login(req.body);
         if(log.success){
             const accessToken = createTokens(log.response);
+            log["token"] = accessToken;
             res.cookie("access-token", accessToken, {
               maxAge: 60 * 60 * 24 * 1000,
               //httpOnly: true,
@@ -31,7 +32,7 @@ const login = async (req, res) => {
         }else{
             res.status(400);
         }
-        res.json(log.message);
+        res.send({message: log.message , token: log.token });
     }catch(err){
         res.status(400).json({ error: err });
     }

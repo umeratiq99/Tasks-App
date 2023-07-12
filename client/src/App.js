@@ -6,6 +6,9 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from './components/Register';
 import NotFound from './components/NotFoundPage';
+import Inputtask from './components/Inputtask';
+import ProtectedRoute from '../src/ProtectedRoute';
+import EditTask from './components/EditTask';
 // import InputTask from "./components/Inputtask";
 // import List from "./components/Listtodo";
 // import React, { createContext } from 'react';
@@ -22,6 +25,11 @@ function App() {
           <Route path="/" element={<Front/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path='/tasks' element={
+            <ProtectedRoute>
+              <Inputtask/>
+            </ProtectedRoute>
+          }/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
        {/* <MyContext.Provider value={{count,setCount}}> */}

@@ -6,7 +6,7 @@ const {createTask, findTasks, updateTasks, deleteTasks}=require('../controllers/
 //allTasks, aTasks, updateTasks, deleteTasks
 router.post('/', createTask);
  router.get('/', findTasks);
- router.put('/:id', updateTasks);
- router.delete('/:id', deleteTasks);
+ router.put('/updateTask', updateTasks);
+ router.delete('/', deleteTasks);
 
 module.exports=router;
