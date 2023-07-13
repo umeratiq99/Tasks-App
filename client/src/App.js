@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import NotFound from "./components/NotFoundPage";
 import Listtask from "./components/Listtasks";
-import InputTask from "./components/InputTasks";
 import ProtectedRoute from "../src/ProtectedRoute";
 export const MyContext = createContext();
 function App() {
@@ -25,7 +24,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Navbar />
-                  <InputTask />
                   <Listtask />
                 </ProtectedRoute>
               }

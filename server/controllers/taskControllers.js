@@ -30,7 +30,7 @@ const findTasks = async (req, res) => {
     }
     options.where = where;
     if (req.query.order && req.query.orderby) {
-      options.order = [req.query.orderby, req.query.order];
+      options.order = [[req.query.orderby, req.query.order]];
     }
     const tasks = await retrieve(options);
     if (tasks.success) {

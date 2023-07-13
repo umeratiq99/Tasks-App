@@ -27,7 +27,7 @@ const Login = () => {
         navigate("/tasks");
       })
       .catch((e) => {
-        console.log(e);
+        alert(e.response.data.message);
       });
 
     setIsValid(true);

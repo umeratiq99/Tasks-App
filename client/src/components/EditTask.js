@@ -10,7 +10,7 @@ export default function EditTask({ task, handleUpdateTask }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateTask(task, { title: name, description: desc });
@@ -19,23 +19,6 @@ export default function EditTask({ task, handleUpdateTask }) {
 
   return (
     <>
-      {/* <h5 className="text-left mt-5">Update Todo:</h5> */}
-      {/* <form className="modal" onSubmit={(e) => {
-            e.preventDefault();
-            handleUpdateTask(task, {"title": name, "description": desc})
-        }}>
-            <label htmlFor="">Title:</label>
-            <input className="form-control"type="text" placeholder={name} onChange={e => setName(e.target.value)}/>
-            <label htmlFor="">Description:</label>
-            <input className="form-control" type="text" placeholder={desc} onChange={e => setDesc(e.target.value)}/>
-
-            <button className="btn btn-success" type='submit'>Update</button>
-            <button className="btn btn-danger" type='cancel' onClick={()=>handleCancel} >Cancel</button>
-
-            <hr/>
-        </form> */}
-
-
       <Button variant="primary" onClick={handleShow}>
         Edit
       </Button>
@@ -50,16 +33,28 @@ export default function EditTask({ task, handleUpdateTask }) {
           <Modal.Title>Update Task:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <label htmlFor="">Title:</label>
-            <input className="form-control"type="text" placeholder={name} onChange={e => setName(e.target.value)}/>
-            <label htmlFor="">Description:</label>
-            <input className="form-control" type="text" placeholder={desc} onChange={e => setDesc(e.target.value)}/>
+          <label htmlFor="">Title:</label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="">Description:</label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>Update</Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Update
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
