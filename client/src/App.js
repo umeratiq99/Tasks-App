@@ -1,46 +1,41 @@
-import './App.css';
-import { Fragment, useState } from "react";
-import { Routes , Route } from 'react-router-dom';
-import Front from './components/LandingPage';
+import "./App.css";
+import { Fragment, createContext, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Front from "./components/LandingPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import Register from './components/Register';
-import NotFound from './components/NotFoundPage';
-import Inputtask from './components/Inputtask';
-import ProtectedRoute from '../src/ProtectedRoute';
-import EditTask from './components/EditTask';
-// import InputTask from "./components/Inputtask";
-// import List from "./components/Listtodo";
-// import React, { createContext } from 'react';
+import Register from "./components/Register";
+import NotFound from "./components/NotFoundPage";
+import Listtask from "./components/Listtasks";
+import InputTask from "./components/InputTasks";
+import ProtectedRoute from "../src/ProtectedRoute";
+export const MyContext = createContext();
 function App() {
-  // const [count,setCount]=useState(true);
+  const [count, setCount] = useState(true);
   return (
     <Fragment>
-        <Navbar/>
-        {/* <Front/> */}
       <div className="container">
-          {/* <Route path="/" element={<Home />}/> */}
-          {/* <Route path="/create" element={<Creat/>}/> */}
-        <Routes>
-          <Route path="/" element={<Front/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path='/tasks' element={
-            <ProtectedRoute>
-              <Inputtask/>
-            </ProtectedRoute>
-          }/>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
-       {/* <MyContext.Provider value={{count,setCount}}> */}
-        {/* <Login/> */}
-        {/* <InputTask /> */}
-        {/* <List />  */}
-        {/* </MyContext.Provider> */}
+        <MyContext.Provider value={{count,setCount}}>
+          <Routes>
+            <Route path="/" element={<Front />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/tasks"
+              element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <InputTask />
+                  <Listtask />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MyContext.Provider>
       </div>
     </Fragment>
-
-  )
+  );
 }
 
 export default App;
