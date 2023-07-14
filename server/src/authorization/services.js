@@ -21,7 +21,7 @@ const validateToken = (req, res, next) => {
       const validToken = verify(accessToken, process.env.SECRET);
       if (validToken) {
         req.authenticated = true;
-        req.userId = validToken.id;
+        req.query.user = validToken.id;
         return next();
       } else {
         return res.status(400).json({ error: err });

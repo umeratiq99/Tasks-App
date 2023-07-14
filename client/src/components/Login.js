@@ -1,19 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import {validateEmail,validatePassword} from "../services/validations/emailPwdValidation"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [isValidPass, setValidPass] = useState(true);
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validateEmail(email)) {
       setIsValid(false);
+      return;
+    }
+    if (!validatePassword(password)) {
+      setValidPass(false);
       return;
     }
     const body = {
@@ -32,18 +37,21 @@ const Login = () => {
 
     setIsValid(true);
   };
-
-  const validateEmail = (email) => {
-    // Use a regular expression to validate the email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
   return (
     <>
-    <h1>Task's Manager</h1>
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div className="form-group">
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "100vh",
+          justifyContent: "center",
+        }}
+      >
+        <h2>Task's Manager</h2>
+        <h4>Login</h4>
+        <div className="form-group" style={{ margin: "5px" }}>
           <label htmlFor="email">Email address:</label>
           <input
             type="email"
@@ -53,10 +61,12 @@ const Login = () => {
             required
           />
         </div>
-        {!isValid && (
-          <p className="error">Please enter a valid email address.</p>
-        )}
-        <div className="form-group">
+        <div>
+          {!isValid && (
+            <p style={{ color: "red" }}>Please enter a valid email address.</p>
+          )}
+        </div>
+        <div className="form-group" style={{ margin: "5px" }}>
           <label htmlFor="pwd">Password:</label>
           <input
             type="password"
@@ -66,11 +76,28 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-default">
+        <div>
+          {!isValidPass && (
+            <p style={{ color: "red" }}>
+              Password should have an Uppercase Character, a Lowercase
+              Character, a Number, a Speacial Charcter and Minimum Lenght of 8.
+            </p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className="btn btn-success"
+          style={{ margin: "10px" }}
+        >
           Login
         </button>
-        <button type="button" className="btn btn-default">
-          <Link to="/register">Register</Link>
+        <button type="button" className="btn btn-primary">
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Register
+          </Link>
         </button>
       </form>
     </>

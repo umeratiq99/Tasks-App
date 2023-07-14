@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import jwt from "jwt-decode";
 import EditTask from "./EditTask";
 import InputTask from "./InputTasks";
 import { MyContext } from "../App";
@@ -9,20 +8,18 @@ import Form from "react-bootstrap/Form";
 
 const Listtask = () => {
   const { count, setCount } = useContext(MyContext);
-
-  const user = jwt(localStorage.getItem("token"));
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState("");
   const [order, setOrder] = useState("");
   const [orderby, setOrderby] = useState("");
 
   useEffect(() => {
-    let apiUrl = `http://localhost:5000/tasks?user=${user.id}`;
+    let apiUrl = `http://localhost:5000/tasks?`;
     if (status) {
-      apiUrl = apiUrl + "&status=" + status;
+      apiUrl = apiUrl + "status=" + status + "&";
     }
     if (order && orderby) {
-      apiUrl = apiUrl + "&orderby=" + orderby + "&order=" + order;
+      apiUrl = apiUrl + "orderby=" + orderby + "&order=" + order;
     }
     axios
       .get(apiUrl)
@@ -48,23 +45,18 @@ const Listtask = () => {
       status: "complete",
     };
     axios
-      .put(
-        `http://localhost:5000/tasks/updateTask?id=${task.id}&user=${user.id}`,
-        body
-      )
+      .patch(`http://localhost:5000/tasks/updateTask?id=${task.id}`, body)
       .then((res) => {
         setCount(!count);
       })
       .catch((e) => {
-        alert(e.message);
+        console.log(e)
+        alert(e);
       });
   };
   const handleUpdateTask = (task, update) => {
     axios
-      .put(
-        `http://localhost:5000/tasks/updateTask?id=${task.id}&user=${user.id}`,
-        update
-      )
+      .patch(`http://localhost:5000/tasks/updateTask?id=${task.id}`, update)
       .then((res) => {
         setCount(!count);
       })
@@ -74,7 +66,7 @@ const Listtask = () => {
   };
   const handleDelete = (task) => {
     axios
-      .delete(`http://localhost:5000/tasks?user=${user.id}&id=${task.id}`)
+      .delete(`http://localhost:5000/tasks?id=${task.id}`)
       .then((res) => {
         alert("Deleted");
         setCount(!count);
@@ -90,11 +82,14 @@ const Listtask = () => {
 
   return tasks ? (
     <>
-      <div className="container" style={{display :'flex' , justifyContent:'space-between'}}>
-        <h2 >Task Manager</h2>
-        <InputTask/>
+      <div
+        className="container"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <h2>Task Manager</h2>
+        <InputTask />
       </div>
-        <hr/>
+      <hr />
       <h4 className="text-left mt-5">Tasks:</h4>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Table style={{ width: "400px" }}>
@@ -185,10 +180,7 @@ const Listtask = () => {
                 </td>
                 <td>
                   {task.status === "pending" ? (
-                    <EditTask
-                      task={task}
-                      handleUpdateTask={() => handleUpdateTask}
-                    />
+                    <EditTask task={task} handleUpdateTask={handleUpdateTask} />
                   ) : (
                     <></>
                   )}

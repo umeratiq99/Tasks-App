@@ -19,8 +19,6 @@ const createTask = async (req, res) => {
 
 // // getting all tasks for certain user
 const findTasks = async (req, res) => {
-
-  console.log(req);
   try {
     let options = {};
     let where = {};

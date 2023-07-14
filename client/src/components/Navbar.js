@@ -2,7 +2,21 @@ import { Link, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NB from 'react-bootstrap/Navbar';
+import axios from "axios";
+
 const Navbar = () => {
+
+  const handleLogout=()=>{
+    localStorage.removeItem('token');
+    axios.post("http://localhost:5000/user/logout")
+    .then((res) => {
+      navigate("/login");
+    })
+    .catch((e) => {
+      alert(e.response.data.message);
+    });
+  }
+  
   const navigate=useNavigate();
   return (
     <>
@@ -12,10 +26,7 @@ const Navbar = () => {
           <Nav>
             <Nav.Link ><button
             className="btn btn-danger navbar-btn"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
+            onClick={handleLogout}
           >
             Logout
           </button></Nav.Link>

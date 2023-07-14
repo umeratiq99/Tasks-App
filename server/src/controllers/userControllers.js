@@ -1,7 +1,7 @@
 const {Register, Login}=require("../services/userServices")
 // const Users = require("../models/users");
 // const bcrypt = require("bcrypt");
-const { createTokens } = require("../authorization/services");
+const { createTokens } = require("../src/authorization/services");
 
 //Register
 const register = async (req, res) => {
@@ -26,7 +26,7 @@ const login = async (req, res) => {
             log["token"] = accessToken;
             res.cookie("access-token", accessToken, {
               maxAge: 60 * 60 * 24 * 1000,
-              //httpOnly: true,
+              httpOnly: true,
             });
             res.status(200);
         }else{

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -33,18 +32,18 @@ export default function EditTask({ task, handleUpdateTask }) {
           <Modal.Title>Update Task:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label htmlFor="">Title:</label>
+          <label >Title:</label>
           <input
             className="form-control"
             type="text"
-            placeholder={name}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="">Description:</label>
+          <label >Description:</label>
           <input
             className="form-control"
             type="text"
-            placeholder={desc}
+            value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
         </Modal.Body>

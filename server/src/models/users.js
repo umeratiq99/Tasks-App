@@ -1,5 +1,5 @@
 // Table Schema in DB
-const sq = require("../config/dbconfig");
+const sq = require("../src/config/dbconfig");
 const { DataTypes } = require("sequelize");
 
 //Creating Table in DB

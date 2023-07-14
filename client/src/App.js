@@ -8,9 +8,11 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFoundPage";
 import Listtask from "./components/Listtasks";
 import ProtectedRoute from "../src/ProtectedRoute";
+import axios from "axios";
 export const MyContext = createContext();
 function App() {
   const [count, setCount] = useState(true);
+  axios.defaults.withCredentials = true;
   return (
     <Fragment>
       <div className="container">
