@@ -7,12 +7,14 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 
 const Listtask = () => {
+  // Global States
   const { count, setCount } = useContext(MyContext);
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState("");
   const [order, setOrder] = useState("");
   const [orderby, setOrderby] = useState("");
 
+  // API call for geting tasks of the user
   useEffect(() => {
     let apiUrl = `http://localhost:5000/tasks?`;
     if (status) {
@@ -31,6 +33,7 @@ const Listtask = () => {
       });
   }, [count, status, order, orderby]);
 
+  // function to set color for status
   const getColor = (taskStatus) => {
     if (taskStatus === "pending") {
       return "red";
@@ -40,6 +43,7 @@ const Listtask = () => {
     }
   };
 
+  // API call for updating status 
   const handleStatus = (task) => {
     const body = {
       status: "complete",
@@ -54,6 +58,8 @@ const Listtask = () => {
         alert(e);
       });
   };
+
+  // API call for updating the task
   const handleUpdateTask = (task, update) => {
     axios
       .patch(`http://localhost:5000/tasks/updateTask?id=${task.id}`, update)
@@ -64,6 +70,8 @@ const Listtask = () => {
         alert(e.message);
       });
   };
+
+  // API call for deleting a task
   const handleDelete = (task) => {
     axios
       .delete(`http://localhost:5000/tasks?id=${task.id}`)
@@ -76,6 +84,7 @@ const Listtask = () => {
       });
   };
 
+  // Function to set filtering and sorting options
   const handleFilterSort = (value, setFunction) => {
     setFunction(value);
   };

@@ -1,9 +1,11 @@
+// Login Component
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import {validateEmail,validatePassword} from "../services/validations/emailPwdValidation"
 
 const Login = () => {
+  // States to handle the input from user
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -11,6 +13,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  // API call on login submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {

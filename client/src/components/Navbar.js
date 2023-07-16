@@ -1,3 +1,4 @@
+// Navbar and Logout button
 import { Link, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -6,6 +7,7 @@ import axios from "axios";
 
 const Navbar = () => {
 
+  // Handling logout
   const handleLogout=()=>{
     localStorage.removeItem('token');
     axios.post("http://localhost:5000/user/logout")

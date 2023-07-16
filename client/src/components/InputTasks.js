@@ -1,3 +1,4 @@
+// component to handle new input for tasks
 import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -9,6 +10,8 @@ const InputTask = () => {
   const [description, setDes] = useState("");
   const [show, setShow] = useState(false);
   const { count, setCount } = useContext(MyContext);
+
+  // API call on submission of new task
   const onSubmit = (e) => {
     e.preventDefault();
     const body = { title, description };
@@ -26,9 +29,11 @@ const InputTask = () => {
     console.log(body);
   };
 
+  // to handle closing and opening the input modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // returning the JSX modal for input form form
   return (
     <>
       <Button variant="primary" onClick={handleShow}>

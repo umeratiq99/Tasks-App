@@ -1,3 +1,4 @@
+// Landing page when the app first starts
 import { Link } from "react-router-dom";
 const Front = () => {
   return (

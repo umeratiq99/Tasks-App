@@ -1,6 +1,8 @@
 import "./App.css";
 import { Fragment, createContext, useState } from "react";
+// Importing Route functions for react
 import { Routes, Route } from "react-router-dom";
+// importing all the components
 import Front from "./components/LandingPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
@@ -11,7 +13,7 @@ import ProtectedRoute from "../src/ProtectedRoute";
 import axios from "axios";
 export const MyContext = createContext();
 function App() {
-  const [count, setCount] = useState(true);
+  const [count, setCount] = useState(true); // Using global state for rerendering the pages.
   axios.defaults.withCredentials = true;
   return (
     <Fragment>
@@ -24,7 +26,7 @@ function App() {
             <Route
               path="/tasks"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute>  {/*implementing protected routes*/}
                   <Navbar />
                   <Listtask />
                 </ProtectedRoute>
