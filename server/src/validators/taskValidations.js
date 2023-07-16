@@ -1,6 +1,11 @@
+// Implementing Validations middleware for Task requests
+
+// Requering Validation Functions express-validators
 const { query, validationResult, body } = require("express-validator");
 
+// Implementing Validation's Array for tasks 
 const validations = [
+  // Validating Query Params
   query("id")
     .optional()
     .trim()
@@ -55,6 +60,7 @@ const validations = [
       }
       return true;
     }),
+    // Validating Body Params
     body("title")
     .optional()
     .notEmpty()
@@ -85,6 +91,7 @@ const validations = [
     }),
 ];
 
+// Verifying Validation results 
 const validateResult = (req, res, next) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {

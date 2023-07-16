@@ -1,3 +1,4 @@
+// Object for Development Configuration
 const dotenv = require("dotenv");
 dotenv.config();
 module.exports = {

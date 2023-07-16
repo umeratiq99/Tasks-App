@@ -1,9 +1,7 @@
-const {Register, Login}=require("../services/userServices")
-// const Users = require("../models/users");
-// const bcrypt = require("bcrypt");
-const { createTokens } = require("../src/authorization/services");
+const {Register, Login}=require("../services/userServices") // Requering User services.
+const { createTokens } = require("../authorization/services"); // Function to genereate token
 
-//Register
+//Register Controller
 const register = async (req, res) => {
   try {
     const reg=await Register(req.body);
@@ -17,7 +15,7 @@ const register = async (req, res) => {
   }
 };
 
-// Login
+// Login Controller
 const login = async (req, res) => {
     try{
         const log= await Login(req.body);
@@ -38,7 +36,7 @@ const login = async (req, res) => {
     }
 };
 
-// Logout
+// Logout Controller
 const logout = async (req, res) => {
   res.clearCookie("access-token");
   res.status(200).json({ message: "Logout successful" });

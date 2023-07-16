@@ -1,5 +1,6 @@
-const Tasks = require("../models/tasks");
+const Tasks = require("../models/tasks"); // Requiring Tasks Model 
 
+// Creating Task
 const create=async(data)=>{
     try{
         const newTask = await Tasks.create(data);
@@ -13,6 +14,7 @@ const create=async(data)=>{
     }
 }
 
+// Retrieving Task
 const retrieve=async(options)=>{
     try{
         const tasks=await Tasks.findAll(options);
@@ -26,6 +28,7 @@ const retrieve=async(options)=>{
     }
 }
 
+// Updating Task
 const update=async(obj,where)=>{
     try{        
         console.log(obj, where)
@@ -41,6 +44,7 @@ const update=async(obj,where)=>{
     }
 }
 
+// Deleting Task
 const deletes= async(where)=>{
     try{
         const dtasks=await Tasks.destroy(where);

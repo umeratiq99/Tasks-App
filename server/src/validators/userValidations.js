@@ -1,5 +1,9 @@
+// Implementing Validations middleware for User requests
+
+// Requering Validation Functions express-validators
 const { validationResult, body } = require("express-validator");
 
+// Implementing Validation's Array for users 
 const validations = [
     body("username")
     .optional()
@@ -21,7 +25,7 @@ const validations = [
     .isString()
     .withMessage("Password should be Alphanumeric"),
 ];
-
+// Implementing Validation's Array for users 
 const validateResult = (req, res, next) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {

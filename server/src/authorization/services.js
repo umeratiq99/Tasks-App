@@ -1,7 +1,10 @@
-const { sign, verify } = require("jsonwebtoken");
-const dotenv = require("dotenv");
+// Implementing Functions to create and validate tokens
+
+const { sign, verify } = require("jsonwebtoken");  // Requireing sign and verify function from JWT
+const dotenv = require("dotenv"); // Requering .env file for secret
 dotenv.config();
 
+// Creating Token
 const createTokens = (user) => {
   const accessToken = sign(
     { username: user.email, id: user.id },
@@ -11,6 +14,7 @@ const createTokens = (user) => {
   return accessToken;
 };
 
+// Verifying Token
 const validateToken = (req, res, next) => {
   const accessToken = req.cookies["access-token"];
 

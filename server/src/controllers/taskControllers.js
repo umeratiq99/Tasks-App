@@ -1,4 +1,4 @@
-const Tasks = require("../models/tasks");
+// Requring task services
 const { create, retrieve, update, deletes } = require("../services/taskServices");
 
 //create a task for specific user

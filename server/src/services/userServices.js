@@ -1,6 +1,7 @@
-const Users = require("../models/users");
-const bcrypt = require("bcrypt");
+const Users = require("../models/users"); // Requering Users model 
+const bcrypt = require("bcrypt"); // Requring bcrypt library for hashing the password
 
+// registration function
 const Register = async (body) => {
   try {
     const { username, email, password } = body;
@@ -16,6 +17,7 @@ const Register = async (body) => {
   }
 };
 
+// logi function  
 const Login = async (body) => {
   const { email, password } = body;
 
